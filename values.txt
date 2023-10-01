@@ -1,0 +1,87 @@
+CC=clang
+CFLAGS=-g -Wall
+
+all: hello
+
+hello: hello.c test.o
+   $(CC) $(CFLAGS) -o hello hello.c
+
+test.o: test.c
+	 $(CC) -c test.c -o test.o
+
+
+clear:
+  rm hello test.o
+  rm *.o myapp
+
+
+hey: one two
+	# Outputs "hey", since this is the target name
+	echo $@
+
+	# Outputs all prerequisites newer than the target
+	echo $?
+
+	# Outputs all prerequisites
+	echo $^
+
+	touch hey
+
+one:
+	touch one
+
+two:
+	touch two
+
+clean:
+	rm -f hey one two
+
+CC=clang
+CFLAGS=-g -Wall
+
+all: f1.o f2.o print
+
+# test blah blah.o blah.c
+
+# test: test.c
+# 	$(CC)  -o test test.c
+
+# blah: blah.o
+# 	gcc blah.o -o blah
+
+# blah.o: blah.c
+# 	gcc -c blah.c -o blah.o #Runs second
+
+# blah.c:
+# 	echo "#include <stdio.h> #include <stdlib.h> int main(void){ printf("\"Raphael is trying make file\n\"");}" > blah.c
+
+f1.o f2.o:
+	echo $@
+# Equivalent to:
+# f1.o:
+#	 echo f1.o
+# f2.o:
+#	 echo f2.o
+
+print: $(wildcard *.c)
+	ls -la  $?
+
+
+// void createAccount(sqlite3 *db, Account acct){
+//     char *zErrMsg = 0;
+//     int rc;
+//     char sql[100];
+
+//     while(scanf("%s, %d, %f, %s", acct.name, acct.acctNum, &acct.balance,acct.description)==1){
+//         sprintf(sql, "INSERT INTO ACCOUNT (NAME, ACCOUNT_NUMBER, BALANCE, DESCRIPTION) VALUES ('%s', %d, %f, '%s');", acct.name, acct.acctNum, acct.balance,acct.description);
+//     }
+//     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+
+//     if (rc != SQLITE_OK) {
+//         fprintf(stderr, "SQL error: %s\n", zErrMsg);
+//         sqlite3_free(zErrMsg);
+//     } else {
+//         printf("Account %s has been cretaed (balance set to 0)\n", acct.name);
+//     }
+// }
