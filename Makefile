@@ -16,6 +16,6 @@ format:
 clean:
 	${RM} -r ${OBJ}
 	${RM} ${BIN} *.db
-	${RM} ${BIN} *.db-journal
+	${RM} *.json
 	echo *Great Success*
 
